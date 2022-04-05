@@ -1,0 +1,81 @@
+<odoo>
+  <data>
+    <record id="sales_ext_order_view_form_new" model="ir.ui.view">
+      <field name="name">sales_ext.order.view.form.new</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <field name="name"/>
+            <field name="partner_id"/>
+            <field name="salesperson"/>
+            <notebook>
+              <page string="Order lines">
+                <field name="order_line" mode="tree">
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="sales_ext_order_view_tree_new" model="ir.ui.view">
+      <field name="name">sales_ext.order.view.tree.new</field>
+      <field name="model">sale.order</field>
+      <field name="arch" type="xml">
+        <tree decoration-success="(amount_total>=100)">
+          <field name="name"/>
+          <field name="partner_id"/>
+          <field name="amount_total" string="Total" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+          <field name="salesperson"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="sales_ext_order_view_kanban_new" model="ir.ui.view">
+      <field name="name">sales_ext.view.order.kanban.new</field>
+      <field name="model">sale.order</field>
+      <field name="arch" type="xml">
+        <kanban class="o_sale_ext_order_kanban" decoration-success="(amount_total>=100)">
+          <field name="name"/>
+          <field name="salesperson"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click">
+                <div class="oe_kanban_details">
+                  <strong class="o_kanban_record_title">
+                    <b><field name="name"/></b>
+                  </strong>
+                  <div>
+                    <field name="partner_id" string="Client:"/>
+                  </div>
+                  <div>
+                    <!-- How to make it clickable? -->
+                    <field name="salesperson"/>
+                  </div>
+                  <div>
+                    <field name="amount_total" string="Total" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record id="action_sales_ext_order" model="ir.actions.act_window">
+      <field name="name">Orders</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">sale.order</field>
+      <field name="view_mode">tree,kanban,form</field>
+      <field name="view_ids" eval="[(5, 0, 0),(0,0,{'view_mode':'tree','view_id':ref('sales_ext_order_view_tree_new')})]" />
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create"> Orders </p>
+        <p> Click 'New' to add new elements. </p>
+      </field>
+    </record>
+  </data>
+</odoo>

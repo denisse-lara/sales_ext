@@ -1,0 +1,7 @@
+<odoo>
+    <menuitem id="sales_ext_menu_root" name="Sales Ext">
+        <menuitem id="orders_level_menu" name="Orders">
+            <menuitem id="order_menu_action" action="action_sales_ext_order"/>
+        </menuitem>
+    </menuitem>
+</odoo>

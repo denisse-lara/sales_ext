@@ -14,11 +14,13 @@
     "category": "Uncategorized",
     "version": "0.1",
     # any module necessary for this one to work correctly
-    "depends": ["base", "sale"],
+    "depends": ["base", "sale_management", "hr"],
     # always loaded
     "data": [
-        # 'security/ir.model.access.csv',
-        "views/views.xml",
+        # "security/ir.model.access.csv",
+        # "views/employee.xml",
+        "views/order.xml",
+        "views/menus.xml",
         "views/templates.xml",
     ],
     # only loaded in demonstration mode
